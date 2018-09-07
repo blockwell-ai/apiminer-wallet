@@ -1,0 +1,18 @@
+# Project specific
+app.yaml
+config.yaml
+knexfile.js
+
+# Logs
+logs
+*.log
+
+# Dependencies
+node_modules/
+
+# IDE files
+.idea
+
+# Dev database
+dev.sqlite3
+

@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">AM Wallet</string>
+
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="register">Register</string>
+    <string name="my_wallet">My Wallet</string>
+    <string name="please_enter_email">Please enter an email address</string>
+    <string name="please_enter_password">Please enter a password</string>
+    <string name="unknown_error">Unknown error, please try again later</string>
+    <string name="no_account_register_here">No Account? Register here</string>
+    <string name="login">Login</string>
+    <string name="already_have_an_account_log_in_here">Already have an account? Log in here</string>
+    <string name="register_description">After registering an account, you will receive your free Wallet Coins.</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="wac">WAC</string>
+    <string name="wallet_coin_balance">Wallet Coin balance</string>
+    <string name="account_copied">Address copied to clipboard</string>
+    <string name="qr_code_description">The above QR code is for the following Ethereum address:</string>
+    <string name="qr_code">QR Code</string>
+    <string name="refreshing_balance">Refreshing balance</string>
+    <string name="received">RECEIVED</string>
+
+    <string name="positive_value">+%s WAC</string>
+    <string name="negative_value">-%s WAC</string>
+    <string name="sent">SENT</string>
+    <string name="from">from</string>
+    <string name="to">to</string>
+    <string name="transfer_address">%1$s %2$s</string>
+    <string name="block_number">BLOCK #%d</string>
+    <string name="recipient_description">Recipient can be either an Ethereum address, or an AM Wallet user\'s email address.</string>
+    <string name="recipient">Recipient</string>
+    <string name="wac_amount">WAC Amount</string>
+    <string name="send">send</string>
+    <string name="send_wallet_coins">Send Wallet Coins</string>
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="scanner_description">Use the scanner to scan an Ethereum address QR code</string>
+    <string name="camera_error">Camera error: %s</string>
+    <string name="qr_not_address">QR code doesn\'t appear to be an Ethereum address</string>
+    <string name="permission_camera_rationale">The camera is required for scanning QR codes</string>
+    <string name="ok">OK</string>
+    <string name="pending_transfer">Sending transfer…</string>
+    <string name="transfer_failed">Transfer failed:</string>
+    <string name="not_enough_balance">Not enough token balance. Try to send less, or refresh your wallet.</string>
+    <string name="address_qr_code">Address QR code</string>
+    <string name="wallet_address">Wallet Address</string>
+    <string name="open_source_licenses">Open Source Licenses</string>
+</resources>

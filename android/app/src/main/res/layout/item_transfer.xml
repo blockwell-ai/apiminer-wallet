@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+    <TextView
+            android:id="@+id/direction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/colorAccent"
+            tools:text="RECEIVED"/>
+
+    <TextView
+            android:id="@+id/blocknum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/direction"
+            tools:text="BLOCK #14149"/>
+
+    <TextView
+            android:id="@+id/value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/direction"
+            android:layout_alignBottom="@+id/blocknum"
+            android:gravity="end|center"
+            android:textSize="24sp"
+            android:textColor="@color/colorSecondary"
+            tools:text="+100 WAC"/>
+
+    <TextView
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/value"
+            android:textColor="@color/primaryLightColor"
+            android:gravity="end"
+            android:ellipsize="middle"
+            android:singleLine="true"
+            android:fontFamily="monospace"
+            tools:text="from 0x23fa157A1191094F7eaeC704d03a7239828d263F"/>
+</RelativeLayout>

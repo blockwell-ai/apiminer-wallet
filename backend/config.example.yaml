@@ -1,0 +1,13 @@
+# The amount of tokens to airdrop to new accounts, given in the smallest unit
+initial_airdrop_amount: "100000000000000000000"
+
+## API Miner
+
+# API Miner URL
+apiminer_url: https://spout.apiminer.com/
+
+# The main account access token for API Miner
+apiminer_token:
+
+# The ID of the contract for the tokens
+token_contract_id:

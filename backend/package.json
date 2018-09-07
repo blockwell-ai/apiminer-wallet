@@ -1,0 +1,44 @@
+{
+    "name": "apiminer-wallet",
+    "version": "1.0.0",
+    "private": true,
+    "main": "src/index.js",
+    "scripts": {
+        "start": "knex-migrate up && node .",
+        "dev": "nodemon $NODE_DEBUG_OPTION ."
+    },
+    "engines": {
+        "node": "~8"
+    },
+    "dependencies": {
+        "bluebird": "3.5.1",
+        "body-parser": "1.18.3",
+        "celebrate": "8.0.0",
+        "express": "4.16.3",
+        "helmet": "3.12.1",
+        "joi": "13.4.0",
+        "knex": "0.15.0",
+        "knex-migrate": "1.6.1",
+        "mysql2": "1.5.3",
+        "nconf": "0.10.0",
+        "nconf-yaml": "1.0.2",
+        "postmark": "1.6.1",
+        "request": "2.87.0",
+        "request-promise": "4.2.2",
+        "secure-password": "3.0.0",
+        "uid-generator": "1.0.0",
+        "winston": "3.0.0"
+    },
+    "devDependencies": {
+        "@types/body-parser": "1.17.0",
+        "@types/express": "4.16.0",
+        "@types/nconf": "0.0.37",
+        "@types/joi": "13.3.0",
+        "@types/knex": "0.14.15",
+        "@types/request-promise": "4.1.41",
+        "morgan": "1.9.0",
+        "nodemon": "1.18.1",
+        "sqlite3": "4.0.1",
+        "error-to-json": "1.1.0"
+    }
+}

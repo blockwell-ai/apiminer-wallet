@@ -1,0 +1,10 @@
+runtime: nodejs8
+
+env_variables:
+  apiminer_token:
+  token_contract_id:
+
+automatic_scaling:
+  max_instances: 1
+
+instance_class: f2
