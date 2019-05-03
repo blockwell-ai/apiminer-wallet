@@ -31,7 +31,7 @@ android {
             versionNameSuffix "-release"
         }
         debug {
-            buildConfigField("String", "API_BASEURL", "\"http://10.0.0.2:3000\"")
+            buildConfigField("String", "API_BASEURL", "\"http://10.0.2.2:3000\"")
             versionNameSuffix "-debug"
         }
     }
