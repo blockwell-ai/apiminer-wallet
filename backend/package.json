@@ -14,20 +14,20 @@
         "bluebird": "3.5.1",
         "body-parser": "1.18.3",
         "celebrate": "8.0.0",
-        "express": "4.16.3",
+        "express": "4.16.4",
         "helmet": "3.12.1",
         "joi": "13.4.0",
-        "knex": "0.15.0",
-        "knex-migrate": "1.6.1",
+        "knex": "0.16.5",
+        "knex-migrate": "1.7.2",
         "mysql2": "1.5.3",
         "nconf": "0.10.0",
+        "js-yaml": "3.13.1",
         "nconf-yaml": "1.0.2",
-        "postmark": "1.6.1",
         "request": "2.87.0",
-        "request-promise": "4.2.2",
+        "request-promise": "4.2.4",
         "secure-password": "3.0.0",
         "uid-generator": "1.0.0",
-        "winston": "3.0.0"
+        "winston": "3.2.1"
     },
     "devDependencies": {
         "@types/body-parser": "1.17.0",
@@ -36,8 +36,8 @@
         "@types/joi": "13.3.0",
         "@types/knex": "0.14.15",
         "@types/request-promise": "4.1.41",
-        "morgan": "1.9.0",
-        "nodemon": "1.18.1",
+        "morgan": "1.9.1",
+        "nodemon": "1.19.0",
         "sqlite3": "4.0.1",
         "error-to-json": "1.1.0"
     }
