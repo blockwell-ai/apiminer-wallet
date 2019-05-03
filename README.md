@@ -13,16 +13,16 @@ See the respective READMEs of each component for more details.
 
 ## Local development quickstart
 
-1. Install [Node.js LTS](https://nodejs.org/) and [Android Studio](https://developer.android.com/studio).
+##### 1. Install [Node.js LTS](https://nodejs.org/) and [Android Studio](https://developer.android.com/studio).
 
-2. Clone this repository:
+##### 2. Clone this repository:
 
 ```
 git clone https://github.com/blockwell-ai/apiminer-wallet.git
 cd apiminer-wallet
 ```
 
-3. Configure backend:
+##### 3. Configure backend:
 
 ```
 cd backend
@@ -31,15 +31,16 @@ cp app.example.yaml app.yaml
 cp knexfile.example.js knexfile.js
 ```
 
-4. Edit config.yaml and put in your `apiminer_token` and `token_contract_id`.
-5. Install dependencies and initialize the database:
+##### 4. Edit config.yaml and put in your `apiminer_token` and `token_contract_id`.
+
+##### 5. Install dependencies and initialize the database:
 
 ```
 npm install
 npx knex-migrate up
 ```
 
-6. Then run the development server:
+##### 6. Then run the development server:
 
 ```
 npx run dev
@@ -47,7 +48,9 @@ npx run dev
 
 Keep this running.
 
-7. To configure the mobile app, you'll need the IP address of the server running
+##### 7. Get server IP
+
+To configure the mobile app, you'll need the IP address of the server running
 on your computer.
 
 - If you're using an Android emulator, this IP address is `10.0.2.2`.
@@ -56,7 +59,7 @@ local network, and you need to use your computer's IP address on the network. Yo
 can try getting the address using `ifconfig | grep -Po 'inet \K[\d.]+'` - the correct
 one is probably the one that starts with either `10.0.` or `192.168.`.
 
-8. Open Android Studio.
+##### 8. Open Android Studio.
 
 If this is the first time you're running Android Studio:
 
@@ -86,15 +89,17 @@ click that. Accept any licenses needed, and go through the wizard.
 Android Studio may say "Android Gradle Plugin Update Recommended". Click
 "Don't remind me again for this project".
 
-9. Edit the file `build.gradle (Module: app)` under Gradle Scripts, and 
+##### 9. Configure server IP
+
+Edit the file `build.gradle (Module: app)` under Gradle Scripts, and 
 replace the IP address `10.0.0.2` with your server IP address from Step 7.
 
-10. Connect your Android device or start an emulator.
+##### 10. Connect your Android device or start an emulator.
 
 If using an emulator, you can start one by going to Tools -> AVD Manager,
 and clicking on the Play button on the right of the listed emulator.
 
-11. Run the app
+##### 11. Run the app
 
 Go to Run -> Run 'app', and a window listing your device or emulator
 should show. Click OK.
