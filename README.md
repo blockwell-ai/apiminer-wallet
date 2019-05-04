@@ -56,8 +56,13 @@ on your computer.
 - If you're using an Android emulator, this IP address is `10.0.2.2`.
 - If using a real phone, both the computer and your phone need to be on the same
 local network, and you need to use your computer's IP address on the network. You
-can try getting the address using `ifconfig | grep -Po 'inet \K[\d.]+'` - the correct
-one is probably the one that starts with either `10.0.` or `192.168.`.
+can try getting the address using:
+
+```
+ifconfig | grep -Po 'inet \K[\d.]+'
+```
+
+- the correct one is probably the one that starts with either `10.0.` or `192.168.`.
 
 ##### 8. Open Android Studio.
 
