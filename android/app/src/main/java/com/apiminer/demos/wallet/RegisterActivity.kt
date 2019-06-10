@@ -1,13 +1,14 @@
 package com.apiminer.demos.wallet
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import com.apiminer.demos.wallet.api.Auth
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.*
 import org.koin.android.ext.android.inject
 
@@ -17,6 +18,7 @@ import org.koin.android.ext.android.inject
 class RegisterActivity : AppCompatActivity() {
 
     val auth: Auth by inject()
+    val scope = MainScope()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,10 +61,10 @@ class RegisterActivity : AppCompatActivity() {
         register.isEnabled = false
 
         // Launch a coroutine for the background work
-        launch(kotlinx.coroutines.experimental.android.UI) {
-            val result = auth.register(emailInput, passwordInput).await()
+        scope.launch {
+            val result = auth.register(emailInput, passwordInput)
 
-            result.fold({ _ ->
+            result.fold({
                 startActivity(intentFor<WalletActivity>().clearTask().newTask())
             }, { error ->
                 val message = error.message

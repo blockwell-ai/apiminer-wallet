@@ -1,14 +1,14 @@
 package com.apiminer.demos.wallet
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.apiminer.demos.wallet.api.Auth
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.*
 import org.koin.android.ext.android.inject
 
@@ -18,6 +18,7 @@ import org.koin.android.ext.android.inject
 class LoginActivity : AppCompatActivity() {
 
     val auth: Auth by inject()
+    val scope = MainScope()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,11 +58,12 @@ class LoginActivity : AppCompatActivity() {
         login_progress.visibility = View.VISIBLE
         sign_in.isEnabled = false
 
-        // Launch a coroutine for the background work
-        launch(UI) {
-            val result = auth.login(emailInput, passwordInput).await()
 
-            result.fold({ _ ->
+        // Launch a coroutine for the background work
+        scope.launch {
+            val result = auth.login(emailInput, passwordInput)
+
+            result.fold({
                 startActivity(intentFor<WalletActivity>().clearTask().newTask())
             }, { error ->
                 val message = error.message

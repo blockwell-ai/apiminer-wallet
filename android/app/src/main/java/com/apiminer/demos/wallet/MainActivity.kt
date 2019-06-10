@@ -1,7 +1,7 @@
 package com.apiminer.demos.wallet
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.apiminer.demos.wallet.api.Auth
 import org.jetbrains.anko.startActivity
 import org.koin.android.ext.android.inject

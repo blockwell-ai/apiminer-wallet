@@ -1,10 +1,10 @@
 package com.apiminer.demos.wallet.api
 
 import android.util.Log
-import awaitObjectResult
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.FuelError
 import com.github.kittinunf.fuel.core.ResponseDeserializable
+import com.github.kittinunf.fuel.coroutines.awaitObjectResult
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 import com.google.gson.JsonObject

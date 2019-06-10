@@ -5,12 +5,10 @@ import com.apiminer.demos.wallet.data.DataStore
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.github.kittinunf.result.success
 import com.google.gson.Gson
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.channels.BroadcastChannel
-import kotlinx.coroutines.experimental.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Get transfer history updates.
@@ -19,7 +17,10 @@ import kotlinx.coroutines.experimental.launch
  *
  * Note that this needs to have [cancel] called in order for the updates to stop.
  */
-class TransfersChannel(val client: ApiClient) {
+class TransfersChannel(val client: ApiClient) : CoroutineScope {
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Default
+
     /**
      * Channel for receiving the transfer history.
      *
@@ -29,7 +30,7 @@ class TransfersChannel(val client: ApiClient) {
     val channel: BroadcastChannel<Array<Transfer>> = ConflatedBroadcastChannel()
 
     init {
-        launch(CommonPool) {
+        launch {
             // If we have a cached history, offer that first
             if (DataStore.transfers.isNotEmpty()) {
                 if (!channel.isClosedForSend) {
@@ -45,7 +46,7 @@ class TransfersChannel(val client: ApiClient) {
     /**
      * Fetches the transfer history from the backend.
      */
-    suspend fun refresh() = async(CommonPool) {
+    suspend fun refresh() {
         val response = client.getWithAuth("tokens/transfers", DataStore.accessToken, Transfer.Deserializer)
 
         response.success { result ->
@@ -58,8 +59,6 @@ class TransfersChannel(val client: ApiClient) {
                 channel.offer(result)
             }
         }
-
-        response
     }
 
     /**

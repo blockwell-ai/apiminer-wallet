@@ -1,6 +1,6 @@
 package com.apiminer.demos.wallet.viewmodel
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.apiminer.demos.wallet.api.ApiClient
 import com.apiminer.demos.wallet.api.TransferTokensChannel
 

@@ -3,8 +3,7 @@ package com.apiminer.demos.wallet
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,10 +12,10 @@ import com.apiminer.demos.wallet.data.DataStore
 import com.apiminer.demos.wallet.viewmodel.SendModel
 import com.github.kittinunf.result.Result
 import kotlinx.android.synthetic.main.activity_send.*
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
-import kotlinx.coroutines.experimental.channels.consumeEach
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.startActivityForResult
 import org.koin.android.architecture.ext.viewModel
@@ -27,6 +26,7 @@ import java.math.BigDecimal
  */
 class SendActivity : AppCompatActivity() {
 
+    val scope = MainScope()
     val model by viewModel<SendModel>()
     var channel: ReceiveChannel<Result<TransferResponse, Exception>>? = null
 
@@ -59,7 +59,7 @@ class SendActivity : AppCompatActivity() {
         }
     }
 
-    fun attemptSend() = launch(UI) {
+    fun attemptSend() = scope.launch {
         val to = recipient.text.toString()
 
         // Convert the user entered value to the smallest unit
@@ -79,13 +79,13 @@ class SendActivity : AppCompatActivity() {
         model.tokens.transfer(to, value.toBigInteger().toString())
     }
 
-    fun listenToResult() = launch(UI) {
+    fun listenToResult() = scope.launch {
         // We're creating a new subscription to the token transfer event channel
         val subscription = model.tokens.channel.openSubscription()
         channel = subscription
 
         subscription.consumeEach {
-            it.fold({ _ ->
+            it.fold({
                 finish()
             }, { error ->
                 send_progress.visibility = View.INVISIBLE

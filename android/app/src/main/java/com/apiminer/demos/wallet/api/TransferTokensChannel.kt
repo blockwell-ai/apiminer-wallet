@@ -6,16 +6,20 @@ import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.github.kittinunf.result.Result
 import com.github.kittinunf.result.success
 import com.google.gson.Gson
-import kotlinx.coroutines.experimental.*
-import kotlinx.coroutines.experimental.channels.BroadcastChannel
-import kotlinx.coroutines.experimental.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Transfer tokens and subscribe to results.
  *
  * Uses coroutine channels for responses.
  */
-class TransferTokensChannel(val client: ApiClient) {
+class TransferTokensChannel(val client: ApiClient) : CoroutineScope {
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Default
+
     /**
      * Channel for receiving the token transfer response.
      *
@@ -41,7 +45,7 @@ class TransferTokensChannel(val client: ApiClient) {
             return
         }
 
-        job = launch(CommonPool) {
+        job = launch {
             val response = client.postWithAuth("tokens/transfers",
                     DataStore.accessToken,
                     TransferResponse.Deserializer,

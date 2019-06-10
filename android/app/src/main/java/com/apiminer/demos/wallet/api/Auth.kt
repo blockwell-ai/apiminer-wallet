@@ -4,8 +4,8 @@ import com.apiminer.demos.wallet.data.DataStore
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.github.kittinunf.result.success
 import com.google.gson.Gson
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Logic for login and registration
@@ -22,10 +22,10 @@ class Auth(val client: ApiClient) {
         return DataStore.email
     }
 
-    suspend fun register(email: String, password: String) = async(CommonPool) {
+    suspend fun register(email: String, password: String) = withContext(Dispatchers.Default) {
         val response = client.post("auth/register", AuthResponse.Deserializer, AuthRequest(email, password))
 
-        response.success {result ->
+        response.success { result ->
             DataStore.email = email
             DataStore.accessToken = result.token
             DataStore.tokenExpiration = result.expiration
@@ -34,7 +34,7 @@ class Auth(val client: ApiClient) {
         response
     }
 
-    suspend fun login(email: String, password: String) = async(CommonPool) {
+    suspend fun login(email: String, password: String) = withContext(Dispatchers.Default) {
         val response = client.post("auth/login", AuthResponse.Deserializer, AuthRequest(email, password))
 
         response.success {result ->

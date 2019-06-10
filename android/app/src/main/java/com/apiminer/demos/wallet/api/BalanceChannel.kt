@@ -5,9 +5,10 @@ import com.apiminer.demos.wallet.data.DataStore
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.github.kittinunf.result.success
 import com.google.gson.Gson
-import kotlinx.coroutines.experimental.*
-import kotlinx.coroutines.experimental.channels.BroadcastChannel
-import kotlinx.coroutines.experimental.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Get wallet balance updates.
@@ -16,7 +17,10 @@ import kotlinx.coroutines.experimental.channels.ConflatedBroadcastChannel
  *
  * Note that this needs to have [cancel] called in order for the updates to stop.
  */
-class BalanceChannel(val client: ApiClient) {
+class BalanceChannel(val client: ApiClient) : CoroutineScope {
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Default
+
     /**
      * Channel for receiving the balance.
      *
@@ -31,7 +35,7 @@ class BalanceChannel(val client: ApiClient) {
     val job: Job
 
     init {
-        job = launch(CommonPool) {
+        job = launch {
             // If we have a cached balance, offer that first
             if (DataStore.balance.isNotEmpty()) {
                 if (!channel.isClosedForSend) {
@@ -50,7 +54,7 @@ class BalanceChannel(val client: ApiClient) {
             if (channel.isClosedForSend) {
                 break
             }
-            refreshBalance().await()
+            refreshBalance()
             delay(5000)
         }
     }
@@ -58,7 +62,7 @@ class BalanceChannel(val client: ApiClient) {
     /**
      * Refreshes the user's wallet balance.
      */
-    suspend fun refreshBalance() = async(CommonPool) {
+    suspend fun refreshBalance() {
         val response = client.getWithAuth("tokens/balance", DataStore.accessToken, BalanceResponse.Deserializer)
 
         // Cache the results and offer the new balance to the channel
@@ -73,8 +77,6 @@ class BalanceChannel(val client: ApiClient) {
                 channel.offer(result)
             }
         }
-
-        response
     }
 
     /**

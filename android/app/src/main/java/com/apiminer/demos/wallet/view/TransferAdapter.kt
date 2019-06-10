@@ -1,6 +1,6 @@
 package com.apiminer.demos.wallet.view
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.apiminer.demos.wallet.R
@@ -10,7 +10,7 @@ import org.jetbrains.anko.layoutInflater
 import org.jetbrains.anko.textColorResource
 import java.math.BigDecimal
 
-class TransferAdapter : RecyclerView.Adapter<TransferHolder>() {
+class TransferAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<TransferHolder>() {
     private var items = listOf<Transfer>()
     var userAccount: String = ""
 
@@ -30,7 +30,7 @@ class TransferAdapter : RecyclerView.Adapter<TransferHolder>() {
     }
 }
 
-class TransferHolder(val view: View) : RecyclerView.ViewHolder(view) {
+class TransferHolder(val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     fun bind(transfer: Transfer, received: Boolean) {
         val res = view.resources
         val value = BigDecimal(transfer.value).divide(BigDecimal(1e18))
