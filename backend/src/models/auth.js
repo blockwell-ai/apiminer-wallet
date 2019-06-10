@@ -11,6 +11,10 @@ const error = require('../lib/error');
 const log = require('../lib/logging');
 const api = require('../apiminer');
 
+// This is the ID of the Token we're using
+const contractId = config.get('token_contract_id');
+let contractNetwork;
+
 /**
  * Registers a new user.
  *
@@ -45,6 +49,11 @@ async function register(email, password) {
     // Save the user's account
     await users.update(user);
 
+    if (!contractNetwork) {
+        let contract = await admin.getContract(contractId);
+        contractNetwork = contract.network;
+    }
+
     // Finally, send the user some tokens, but don't wait for it to finish.
     // Note the lack of await.
     admin.transfer(user.account, config.get('initial_airdrop_amount'))
@@ -53,6 +62,15 @@ async function register(email, password) {
             message: err.message,
             stack: err.stack
         }));
+
+    if (contractNetwork === 'rinkeby') {
+        admin.transferEther(user.account, '10000000000000000', contractNetwork)
+            .catch(err => log.error('Error with sending seed ether', {
+                error: err.name,
+                message: err.message,
+                stack: err.stack
+            }));
+    }
 
     return {user, token};
 }

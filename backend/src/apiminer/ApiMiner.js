@@ -98,6 +98,18 @@ class ApiMiner {
         }).then(response => response.data.id);
     }
 
+    transferEther(to, amount, network) {
+        return this.request({
+            method: 'POST',
+            uri: `/transactions`,
+            body: {
+                to: to,
+                value: amount,
+                network: network
+            }
+        }).then(response => response.data.id);
+    }
+
     /**
      * Get the status of a transfer by its transaction ID.
      *
@@ -133,6 +145,12 @@ class ApiMiner {
     getBalance() {
         return this.request({
             uri: `/tokens/${contractId}/balances/default`,
+        }).then(response => response.data);
+    }
+
+    getContract(id) {
+        return this.request({
+            uri: `/contracts/${contractId}`,
         }).then(response => response.data);
     }
 }
