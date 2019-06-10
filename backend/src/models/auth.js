@@ -24,7 +24,7 @@ let contractNetwork;
  */
 async function register(email, password) {
     // Hash their password
-    const hashed = await hash.hash(Buffer.from(password));
+    const hashed = await hash.hash(password);
 
     // Create the user and access token
     let user = await users.create(email, hashed.toString('hex'));
@@ -88,9 +88,9 @@ async function login(email, password) {
         throw error(401, 'Login failed');
     }
 
-    const verify = await hash.verify(Buffer.from(password), Buffer.from(user.password, 'hex'));
+    const verify = await hash.verify(password, user.password);
 
-    if (verify === hash.VALID) {
+    if (verify) {
         return access.generate(user.id);
     } else {
         throw error(401, 'Login failed');

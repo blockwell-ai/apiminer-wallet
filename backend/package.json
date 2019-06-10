@@ -11,6 +11,7 @@
         "node": "~8"
     },
     "dependencies": {
+        "bcrypt": "3.0.6",
         "bluebird": "3.5.1",
         "body-parser": "1.18.3",
         "celebrate": "8.0.0",
@@ -26,7 +27,6 @@
         "nconf-yaml": "1.0.2",
         "request": "2.87.0",
         "request-promise": "4.2.4",
-        "secure-password": "3.0.0",
         "uid-generator": "1.0.0",
         "winston": "3.2.1"
     },
