@@ -22,7 +22,7 @@
         "knex": "0.16.5",
         "knex-migrate": "1.7.2",
         "mysql2": "1.5.3",
-        "nconf": "0.10.0",
+        "nconf": "0.11.4",
         "js-yaml": "3.13.1",
         "nconf-yaml": "1.0.2",
         "request": "2.87.0",
